@@ -2,18 +2,29 @@ use std::fmt;
 
 pub struct Perceptron {
     values: Vec<Vec<f64>>,
-    solutions: Vec<u8>,
+    solutions: Vec<i8>,
     weights: Vec<f64>,
     bias: f64,
     eta: f64
 }
 
 impl Perceptron {
-    pub fn new(values: Vec<Vec<f64>>, solutions: Vec<u8>, weights: Vec<f64>, bias: f64, eta: f64) -> Self {
+    pub fn new(
+        values: Vec<Vec<f64>>, 
+        solutions: Vec<i8>, 
+        weights: Vec<f64>, 
+        bias: f64, 
+        eta: f64
+    ) -> Self 
+    {
         Perceptron { values, solutions, weights, bias, eta }
     }
     
-    pub fn execute(&mut self, f: impl Fn(Vec<Vec<f64>>, Vec<u8>, Vec<f64>, f64, f64) -> (Vec<f64>, f64)) {
+    pub fn execute(
+        &mut self, 
+        f: impl Fn(Vec<Vec<f64>>, Vec<i8>, Vec<f64>, f64, f64) -> (Vec<f64>, f64)
+    ) 
+    {
         let new_params = f(
             self.values.clone(), 
             self.solutions.clone(),
